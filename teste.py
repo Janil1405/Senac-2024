@@ -1,21 +1,24 @@
 import PyPDF2
 
-# Caminho para o arquivo PDF
-caminho_pdf = 'seu_arquivo.pdf'
+# Abre o arquivo PDF
+with open('resultados.pdf', 'rb') as pdf_file:
+    pdf_reader = PyPDF2.PdfReader(pdf_file)
 
-# Lendo o arquivo PDF
-try:
-    with open(caminho_pdf, 'rb') as arquivo:
-        leitor_pdf = PyPDF2.PdfReader(arquivo)
+    # Obtém o número de páginas
+    num_pages = len(pdf_reader.pages)
 
-        # Extraindo texto de cada página
-        for pagina in leitor_pdf.pages:
-            texto = pagina.extract_text()
-            if texto:  # Verificando se há texto na página
-                print(texto)
+    # Extrai o texto da primeira página
+    page = pdf_reader.pages[0]
+    text = page.extract_text()
 
-except FileNotFoundError:
-    print(f"Arquivo não encontrado: {caminho_pdf}")
-except Exception as e:
-    print(f"Ocorreu um erro: {e}")
+    print(text)
+    
+    import tabula
 
+# Extrai todas as tabelas do PDF em DataFrames
+dfs = tabula.read_pdf("meu_pdf.pdf", pages='all')
+
+# Acessando a primeira tabela
+df = dfs[0]
+
+print(df)
