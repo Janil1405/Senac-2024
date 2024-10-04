@@ -1,30 +1,21 @@
-import requests
-import csv
+import PyPDF2
 
-# URL da API para os resultados mais recentes da Mega-Sena
-url = 'hhttp://localhost:3000/v1/api/megasena/2565'
+# Caminho para o arquivo PDF
+caminho_pdf = 'seu_arquivo.pdf'
 
-# Fazendo a requisição para obter os resultados
+# Lendo o arquivo PDF
 try:
-    response = requests.get(url)
+    with open(caminho_pdf, 'rb') as arquivo:
+        leitor_pdf = PyPDF2.PdfReader(arquivo)
 
-    # Verifica se a requisição foi bem-sucedida
-    response.raise_for_status()  # Lança um erro se o status não for 200
-    dados = response.json()  # Converte a resposta em JSON
+        # Extraindo texto de cada página
+        for pagina in leitor_pdf.pages:
+            texto = pagina.extract_text()
+            if texto:  # Verificando se há texto na página
+                print(texto)
 
-    # Extraindo os números sorteados
-    numeros_sorteados = dados['dezenas']
+except FileNotFoundError:
+    print(f"Arquivo não encontrado: {caminho_pdf}")
+except Exception as e:
+    print(f"Ocorreu um erro: {e}")
 
-    # Exibindo os números sorteados
-    print("Números sorteados:", numeros_sorteados)
-
-    # Salvando os resultados em um arquivo CSV
-    with open('resultados_megasena.csv', mode='w', newline='') as arquivo_csv:
-        escritor = csv.writer(arquivo_csv)
-        escritor.writerow(['Dezenas sorteadas'])
-        escritor.writerow(numeros_sorteados)
-
-    print("Os resultados foram armazenados no arquivo 'resultados_megasena.csv'.")
-
-except requests.exceptions.RequestException as e:
-    print(f"Erro ao acessar a API: {e}")
