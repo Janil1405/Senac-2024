@@ -28,24 +28,98 @@
 # pessoa1.apresentar()
 
 
-from datetime import datetime
+# from datetime import datetime
 
-class Pessoa:
-    def __init__(self, nome, idade):
-        self.nome = nome
-        self.idade = idade
+# class Pessoa:
+#     def __init__(self, nome, idade):
+#         self.nome = nome
+#         self.idade = idade
 
-    def calcular_ano_nascimento(self):
-        ano_atual = datetime.now().year
-        ano_nascimento = ano_atual - self.idade
-        return ano_nascimento
+#     def calcular_ano_nascimento(self):
+#         ano_atual = datetime.now().year
+#         ano_nascimento = ano_atual - self.idade
+#         return ano_nascimento
 
-# Usando a classe
-nome = input("Digite seu nome: ")
-idade = int(input("Digite sua idade: "))
+# # Usando a classe
+# nome = input("Digite seu nome: ")
+# idade = int(input("Digite sua idade: "))
 
-pessoa = Pessoa(nome, idade)
-ano_nascimento = pessoa.calcular_ano_nascimento()
+# pessoa = Pessoa(nome, idade)
+# ano_nascimento = pessoa.calcular_ano_nascimento()
 
-print(f"{pessoa.nome}, você nasceu em {ano_nascimento}.")
+# print(f"{pessoa.nome}, você nasceu em {ano_nascimento}.")
+
+# from datetime import datetime
+
+# class Pessoa:
+#     def __init__(self, nome, idade):
+#         self.nome = nome
+#         self.idade = idade
+
+#     def calcular_ano_nascimento(self):
+#         ano_atual = datetime.now().year
+#         ano_nascimento = ano_atual - self.idade
+#         return ano_nascimento
+
+# def main():
+#     resultados = []
+
+#     while True:
+#         nome = input("Digite seu nome (ou 'sair' para finalizar): ")
+#         if nome.lower() == 'sair':
+#             break
+#         idade = int(input("Digite sua idade: "))
+
+#         pessoa = Pessoa(nome, idade)
+#         ano_nascimento = pessoa.calcular_ano_nascimento()
+        
+#         resultado = f"{pessoa.nome}, você nasceu em {ano_nascimento}."
+#         print(resultado)
+#         resultados.append(resultado)
+
+#     # Armazenando os resultados em um arquivo
+#     with open('resultados.txt', 'w') as arquivo:
+#         for resultado in resultados:
+#             arquivo.write(resultado + '\n')
+
+#     print("Os resultados foram armazenados no arquivo 'resultados.txt'.")
+
+# if __name__ == "__main__":
+#     main()
+
+
+# class Carro:
+#     def __init__(self, motor, rodas, farois):
+#         self.motor = motor
+#         self.rodas = rodas
+#         self.farois = farois
+
+#     def ligar(self):
+#         print("Carro ligado")
+
+#     def desligar(self):
+#         print("Carro desligado")
+        
+# # Criando um objeto da classe Carro
+# meu_carro = Carro(motor="gasolina", rodas=4, farois="acesos")
+
+# # Usando os métodos
+# meu_carro.ligar()    # Saída: Carro ligado
+# meu_carro.desligar() # Saída: Carro desligado
+
+
+class Carro:
+    total_de_carros = 6
+
+    def __init__(self, cor):
+        self.cor = cor
+        Carro.total_de_carros += 1
+    
+    @classmethod
+    def mostrar_total(cls):
+        print(f"Total de carros: {cls.total_de_carros}")
+
+carro1 = Carro("azul")
+carro2 = Carro("vermelho")
+Carro.mostrar_total()  # Saída: Total de carros: 2
 
