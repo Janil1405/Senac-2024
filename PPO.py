@@ -123,3 +123,11 @@ carro1 = Carro("azul")
 carro2 = Carro("vermelho")
 Carro.mostrar_total()  # Saída: Total de carros: 2
 
+class Carro:
+    @staticmethod
+    def tipo_de_combustivel():
+        return "Gasolina, Etanol, Elétrico"
+
+print(Carro.tipo_de_combustivel())  # Saída: Gasolina, Etanol, Elétrico
+
+
