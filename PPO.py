@@ -131,11 +131,18 @@
 # print(Carro.tipo_de_combustivel())  # Saída: Gasolina, Etanol, Elétrico
 
 
-# a = [1,3,3,3,3,3]
-# for i in a:
-#     print(i)
 
-a = [1,2,2,2,2]
-a = 2
-while a == 2:
-    print(a)
+
+def bubble_sort(a_list):
+    list_length = len(a_list) -1
+    for i in range(list_length):
+        for j in range(list_length):
+            if a_list[j] > a_list[j+1]:
+                a_list[j], a_list[j+1] = a_list[j+1], a_list[j]
+    return a_list
+
+a_list = [10, 1, 12, 9, 2]
+print(bubble_sort(a_list))
+
+print(len(a_list))
+      
