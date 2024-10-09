@@ -132,6 +132,7 @@
 
 
 
+<<<<<<< HEAD
 # class Pessoa:
 #     def __init__(self,nome):
 #         self.__nome = nome
@@ -159,3 +160,19 @@ n = 5
 for i in range(n):
     print(i-1)
 
+=======
+
+def bubble_sort(a_list):
+    list_length = len(a_list) -1
+    for i in range(list_length):
+        for j in range(list_length):
+            if a_list[j] > a_list[j+1]:
+                a_list[j], a_list[j+1] = a_list[j+1], a_list[j]
+    return a_list
+
+a_list = [10, 1, 12, 9, 2]
+print(bubble_sort(a_list))
+
+print(len(a_list))
+      
+>>>>>>> 37842ddb116dce190338fe33565c093bc47d323b
