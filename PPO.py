@@ -108,26 +108,54 @@
 # meu_carro.desligar() # Saída: Carro desligado
 
 
-class Carro:
-    total_de_carros = 6
+# class Carro:
+#     total_de_carros = 6
 
-    def __init__(self, cor):
-        self.cor = cor
-        Carro.total_de_carros += 1
+#     def __init__(self, cor):
+#         self.cor = cor
+#         Carro.total_de_carros += 1
     
-    @classmethod
-    def mostrar_total(cls):
-        print(f"Total de carros: {cls.total_de_carros}")
+#     @classmethod
+#     def mostrar_total(cls):
+#         print(f"Total de carros: {cls.total_de_carros}")
 
-carro1 = Carro("azul")
-carro2 = Carro("vermelho")
-Carro.mostrar_total()  # Saída: Total de carros: 2
+# carro1 = Carro("azul")
+# carro2 = Carro("vermelho")
+# Carro.mostrar_total()  # Saída: Total de carros: 2
 
-class Carro:
-    @staticmethod
-    def tipo_de_combustivel():
-        return "Gasolina, Etanol, Elétrico"
+# class Carro:
+#     @staticmethod
+#     def tipo_de_combustivel():
+#         return "Gasolina, Etanol, Elétrico"
 
-print(Carro.tipo_de_combustivel())  # Saída: Gasolina, Etanol, Elétrico
+# print(Carro.tipo_de_combustivel())  # Saída: Gasolina, Etanol, Elétrico
 
+
+
+# class Pessoa:
+#     def __init__(self,nome):
+#         self.__nome = nome
+#     @property #getters
+#     def nome(self):
+#         return self.__nome
+#     @nome.setter #setters
+#     def nome(self, novo_nome):
+#         if isinstance(novo_nome, str) and novo_nome.strip():
+#             self.__nome = novo_nome
+#         else:
+#             print("Nome inválido")
+
+# #Uso da classe
+
+# pessoa = Pessoa("Alice")
+# print(pessoa.nome)
+# pessoa.nome = "Bob"
+# print(pessoa.nome)
+# pessoa.nome=""
+
+
+x = 1
+n = 5
+for i in range(n):
+    print(i-1)
 
