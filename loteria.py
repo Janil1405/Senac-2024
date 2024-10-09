@@ -1,37 +1,53 @@
-import pdfplumber
-import pandas as pd
+import itertools
+import csv
 
-# Caminho para o arquivo PDF
-pdf_path = r'C:/Users/janil/OneDrive/Documentos/GitHub/Senac-2024/resultados.pdf'
+# Solicitar 10 dezenas do usuário
+dezenas = []
+print("Insira 10 dezenas (números entre 1 e 60):")
 
-# Função para extrair dados do PDF
-def extrair_dados_pdf(pdf_path):
-    with pdfplumber.open(pdf_path) as pdf:
-        todas_tabelas = []
+while len(dezenas) < 10:
+    try:
+        numero = int(input(f"Dezena {len(dezenas) + 1}: "))
         
-        # Iterar sobre todas as páginas do PDF
-        for pagina in pdf.pages:
-            tabela = pagina.extract_table()
-            if tabela:
-                # Adicionar todas as tabelas extraídas à lista
-                todas_tabelas.extend(tabela)
-                
-    # Remover linhas vazias ou linhas com dados incorretos (se necessário)
-    dados_limpios = [linha for linha in todas_tabelas if any(linha)]
+        # Verificar se o número está entre 1 e 60 e se já não foi inserido
+        if 1 <= numero <= 60 and numero not in dezenas:
+            dezenas.append(numero)
+        else:
+            print("Número inválido ou repetido. Tente novamente.")
     
-    # Converter a tabela em um DataFrame do pandas
-    df = pd.DataFrame(dados_limpios[1:], columns=dados_limpios[0])
-    
-    # Exibir os primeiros registros para verificar
-    print("\nVisualizando as primeiras linhas da tabela extraída:")
-    print(df.head())
-    
-    return df
+    except ValueError:
+        print("Por favor, insira um número válido.")
 
-# Extrair os dados e exibir a tabela
-df_resultados = extrair_dados_pdf(pdf_path)
+# Gerar todas as combinações de 6 dezenas a partir das 10 fornecidas
+combinacoes = list(itertools.combinations(dezenas, 6))
 
-# Salvando o DataFrame em um arquivo Excel
-df_resultados.to_excel(r'C:/Users/janil/OneDrive/Documentos/GitHub/Senac-2024/resultados_megasena.xlsx', index=False)
+# Encontrar a combinação de 6 menores dezenas
+menores_dezenas = sorted(dezenas)[:6]
+soma_menores = sum(menores_dezenas)
 
-print("Arquivo Excel salvo com sucesso!")
+# Encontrar a combinação de 6 maiores dezenas
+maiores_dezenas = sorted(dezenas, reverse=True)[:6]
+soma_maiores = sum(maiores_dezenas)
+
+# Exibir os resultados
+print(f"\nAs 6 menores dezenas são: {menores_dezenas}, com soma = {soma_menores}")
+print(f"As 6 maiores dezenas são: {maiores_dezenas}, com soma = {soma_maiores}")
+
+# Filtrar combinações onde a soma das dezenas está entre 100 e 200
+combinacoes_filtradas = [
+    combinacao for combinacao in combinacoes
+    if 100 < sum(combinacao) < 200
+]
+
+# Exibir o total de combinações filtradas
+print(f"\nTotal de combinações geradas: {len(combinacoes)}")
+print(f"Total de combinações filtradas (soma entre 100 e 200): {len(combinacoes_filtradas)}")
+
+# Salvar as combinações filtradas em um arquivo CSV
+with open("combinacoes_filtradas_megasena.csv", "w", newline="") as file:
+    writer = csv.writer(file)
+    writer.writerow(["Combinação", "Dezenas", "Soma"])  # Cabeçalho
+    for i, combinacao in enumerate(combinacoes_filtradas, 1):
+        writer.writerow([f"Combinação {i}", ", ".join(map(str, combinacao)), sum(combinacao)])
+
+print("Combinações filtradas salvas no arquivo 'combinacoes_filtradas_megasena.csv'.")
